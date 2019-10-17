@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flight-43b.iml" filepath="$PROJECT_DIR$/flight-43b.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flight-api/flight-api.iml" filepath="$PROJECT_DIR$/flight-api/flight-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flight-client/flight-client.iml" filepath="$PROJECT_DIR$/flight-client/flight-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/flight-service/flight-service.iml" filepath="$PROJECT_DIR$/flight-service/flight-service.iml" />
+    </modules>
+  </component>
+</project>

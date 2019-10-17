@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>机票报价查询系统</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/price.css" rel="stylesheet">
+</head>
+<body>
+<div class="page-header">
+    <h1 align="center">机票查询系统 <small>天海广纳版</small></h1>
+</div>
+
+<div class="container" id="main">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 form-inline">
+            <span>出发城市:</span>
+            <input type="text" id="origin" placeholder="BJS" class="form-control">
+        </div>
+        <div class="col-md-4 form-inline">
+            <span>到达城市:</span>
+            <input type="text" id="dest" placeholder="BKK" class="form-control">
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4 form-inline">
+            <span>出发时间:</span>
+            <input type="text" id="departDate" class="form-control" placeholder="2019-05-20">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <button type="button" id="search" class="btn btn-success">搜索</button>
+        </div>
+    </div>
+    <div class="row">
+        <hr>
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            航班信息
+        </div>
+        <div class="col-md-1">
+            起飞时间
+        </div>
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-1">
+            到达时间
+        </div>
+        <div class="col-md-1">
+            退改签
+        </div>
+        <div class="col-md-1">
+            行李额
+        </div>
+        <div class="col-md-1">
+            价格
+        </div>
+        <div class="col-md-1">
+            操作
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script>
+
+    function parseHtml(flight){
+        var html = '<div class="row">\n' +
+            '        <div class="col-md-1"></div>\n' +
+            '        <div class="col-md-2">\n' +
+            '            '+flight.carrier+flight.flightNo +
+            '        </div>\n' +
+            '        <div class="col-md-1">\n' +
+            '            '+flight.departTime +
+            '        </div>\n' +
+            '        <div class="col-md-1">\n' +
+            '\n' +
+            '        </div>\n' +
+            '        <div class="col-md-1">\n' +
+            '            '+flight.arrivalTime +
+            '        </div>\n' +
+            '        <div class="col-md-1">\n' +
+            '            '+flight.rule+
+            '        </div>\n' +
+            '        <div class="col-md-1">\n' +
+            '            '+flight.baggage +
+            '        </div>\n' +
+            '        <div class="col-md-1">\n' +
+            '            '+flight.price +
+            '        </div>\n' +
+            '        <div class="col-md-1">\n' +
+            '            ' +
+            '        </div>\n' +
+            '        <div class="col-md-1"></div>\n' +
+            '    </div>';
+        return html;
+    }
+    function clear() {
+        var i=0;
+        $(".row").each(function () {
+                if(i>4){
+                    $(this).remove();
+                }
+                i++;
+        });
+    }
+
+    $("#search").click(function () {
+        var origin = $("#origin").val();
+        var dest = $("#dest").val();
+        var departDate = $("#departDate").val();
+        var url = "getFlight?origin=" + origin +"&dest="+dest +"&departDate="+departDate;
+        clear();
+        $.get(url, function (data) {
+            var list = data.data;
+            var html = "";
+            for(var i=0;i<list.length;i++){
+                var flight = list[i];
+                html += parseHtml(flight);
+            }
+            $("#main").append(html);
+        });
+    });
+</script>
+</body>
+</html>
